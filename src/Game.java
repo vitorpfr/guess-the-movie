@@ -21,7 +21,6 @@ public class Game {
         boolean inputIsOneDigit = input.length() == 1;
         boolean inputNotChosenYet = !wrongGuesses.contains(Character.toLowerCase(input.charAt(0))) && hiddenMovie.indexOf(Character.toLowerCase(input.charAt(0))) == -1;
         return inputIsLetter && inputIsOneDigit && inputNotChosenYet;
-//        return Character.isLetter(input.charAt(0)) && input.length() == 1 && !wrongGuesses.contains(input.charAt(0)) && hiddenMovie.indexOf(input.charAt(0)) == -1;
     }
 
     // Get input from user until receiving a valid one
