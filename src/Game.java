@@ -10,14 +10,18 @@ public class Game {
 
     // Constructor to start game
     Game(String movieTitle) {
-        this.movie = movieTitle;
-        this.hiddenMovie = movie.replaceAll("[a-zA-Z]", "_");
+        this.movie = movieTitle.toLowerCase();
+        this.hiddenMovie = movie.replaceAll("[a-z]", "_");
         System.out.println("You are guessing: " + hiddenMovie);
     }
 
     // Checks if user input is valid
     private boolean isValidInput(String input) {
-        return Character.isLetter(input.charAt(0)) && input.length() == 1 && !wrongGuesses.contains(input.charAt(0));
+        boolean inputIsLetter = Character.isLetter(input.charAt(0));
+        boolean inputIsOneDigit = input.length() == 1;
+        boolean inputNotChosenYet = !wrongGuesses.contains(Character.toLowerCase(input.charAt(0))) && hiddenMovie.indexOf(Character.toLowerCase(input.charAt(0))) == -1;
+        return inputIsLetter && inputIsOneDigit && inputNotChosenYet;
+//        return Character.isLetter(input.charAt(0)) && input.length() == 1 && !wrongGuesses.contains(input.charAt(0)) && hiddenMovie.indexOf(input.charAt(0)) == -1;
     }
 
     // Get input from user until receiving a valid one
@@ -33,8 +37,8 @@ public class Game {
             guess = scanner.next();
         }
 
-        // Return after confirming that input is valid
-        return guess.charAt(0);
+        // Return lower-case character after confirming that it is valid
+        return Character.toLowerCase(guess.charAt(0));
     }
 
     // Guess the letter that user inputted
